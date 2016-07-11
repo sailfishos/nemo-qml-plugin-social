@@ -62,6 +62,8 @@
 #include <QtCore/QFileInfo>
 #include <QtCore/QByteArray>
 #include <QtNetwork/QNetworkReply>
+#include <QtNetwork/QHttpMultiPart>
+#include <QtNetwork/QHttpPart>
 
 #include <QtDebug>
 
@@ -601,9 +603,9 @@ QUrl FacebookInterfacePrivate::requestUrl(const QString &objectId, const QString
     returnedUrl.setScheme("https");
     returnedUrl.setHost("graph.facebook.com");
     if (extraPath.isEmpty())
-        returnedUrl.setPath(QLatin1String("/v2.2/") + objectId);
+        returnedUrl.setPath(QLatin1String("/v2.6/") + objectId);
     else
-        returnedUrl.setPath(QLatin1String("/v2.2/") + objectId + QLatin1String("/") + extraPath);
+        returnedUrl.setPath(QLatin1String("/v2.6/") + objectId + QLatin1String("/") + extraPath);
 #if QT_VERSION >= QT_VERSION_CHECK(5, 0, 0)
     QUrlQuery query;
     query.setQueryItems(queryItems);
@@ -626,14 +628,13 @@ QNetworkReply * FacebookInterfacePrivate::uploadImage(const QString &objectId,
     // the implementation code for this function is taken from the transfer engine
     QNetworkRequest request;
     QUrl url("https://graph.facebook.com");
-    QString path = "v2.2/" + objectId;
+    QString path = "v2.6/" + objectId;
     if (!extraPath.isEmpty()) {
         path += QLatin1String("/") + extraPath;
     }
     url.setPath(path);
     request.setUrl(url);
 
-    QString multipartBoundary = QLatin1String("-------Sska2129ifcalksmqq3");
     QString filePath = data.value("source").toUrl().toLocalFile();
     QString mimeType = QLatin1String("image/jpeg");
     if (filePath.endsWith("png")) {
@@ -645,48 +646,32 @@ QNetworkReply * FacebookInterfacePrivate::uploadImage(const QString &objectId,
         qWarning() << Q_FUNC_INFO << "Error opening image file:" << filePath;
         return 0;
     }
-
     QByteArray imageData(f.readAll());
     f.close();
 
-    QFileInfo info(filePath);
+    QHttpMultiPart *multiPart = new QHttpMultiPart(QHttpMultiPart::FormDataType);
+    multiPart->setBoundary("-------Sska2129ifcalksmqq3");
 
-    // Fill in the image data first
-    QByteArray postData;
-    postData.append("--"+multipartBoundary+"\r\n");
-    postData.append("Content-Disposition: form-data; name=\"access_token\"\r\n\r\n");
-    postData.append(accessToken);
-    postData.append("\r\n");
+    QHttpPart accessTokenPart;
+    accessTokenPart.setHeader(QNetworkRequest::ContentDispositionHeader, QVariant("form-data; name=\"access_token\""));
+    accessTokenPart.setBody(accessToken.toUtf8());
 
-    // Actually the title isn't used
-    postData.append("--"+multipartBoundary+"\r\n");
-    postData.append("Content-Disposition: form-data; name=\"message\"\r\n\r\n");
-    postData.append(data.value("message").toString());
-    postData.append("\r\n");
+    QHttpPart captionPart;
+    captionPart.setHeader(QNetworkRequest::ContentDispositionHeader, QVariant("form-data; name=\"caption\""));
+    captionPart.setBody(data.value(FACEBOOK_ONTOLOGY_POST_MESSAGE).toString().toUtf8());
 
-    postData.append("--"+multipartBoundary+"\r\n");
-    postData.append("Content-Disposition: form-data; name=\"name\"; filename=\""+info.fileName()+"\"\r\n");
-    postData.append("Content-Type:"+mimeType+"\r\n\r\n");
-    postData.append(imageData);
-    postData.append("\r\n");
+    QHttpPart sourcePart;
+    sourcePart.setHeader(QNetworkRequest::ContentDispositionHeader, QVariant((QStringLiteral("form-data; name=\"file\"; filename=\"%1\"").arg(QFileInfo(filePath).fileName())).toUtf8()));
+    sourcePart.setHeader(QNetworkRequest::ContentTypeHeader, QVariant(mimeType.toUtf8()));
+    sourcePart.setBody(imageData);
+    multiPart->append(accessTokenPart);
+    multiPart->append(captionPart);
+    multiPart->append(sourcePart);
 
-    postData.append("--"+multipartBoundary+"\r\n");
-    postData.append("Content-Disposition: form-data; name=\"privacy\"\r\n\r\n");
-    postData.append(QString("{\'value\':\'ALL_FRIENDS\'}"));
-    postData.append("\r\n");
-    postData.append("--"+multipartBoundary+"\r\n");
-
-    // Header required
-    request.setRawHeader("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8");
-    request.setRawHeader("Accept-Language", "en-us,en;q=0.5");
-    request.setRawHeader("Accept-Encoding", "gzip,deflate");
-    request.setRawHeader("Accept-Charset", "ISO-8859-1,utf-8;q=0.7,*;q=0.7");
-    request.setRawHeader("Keep-Alive", "300");
-    request.setRawHeader("Connection", "keep-alive");
-    request.setRawHeader("Content-Type",QString("multipart/form-data; boundary="+multipartBoundary).toLatin1());
-    request.setHeader(QNetworkRequest::ContentLengthHeader, postData.size());
-
-    return networkAccessManager->post(request, postData);
+    request.setRawHeader("Content-Type", "multipart/form-data; boundary="+multiPart->boundary());
+    QNetworkReply *reply = networkAccessManager->post(request, multiPart);
+    multiPart->setParent(reply);
+    return reply;
 }
 
 void FacebookInterfacePrivate::handlePopulateNode(CacheNode::Ptr node,

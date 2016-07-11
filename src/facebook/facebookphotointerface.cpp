@@ -167,8 +167,6 @@ void FacebookPhotoInterfacePrivate::emitPropertyChangeSignals(const QVariantMap 
         emit q->iconChanged();
     if (newPicture != oldPicture)
         emit q->pictureChanged();
-    if (newSource != oldSource)
-        emit q->sourceChanged();
     if (newHeight != oldHeight)
         emit q->heightChanged();
     if (newWidth != oldWidth)
@@ -183,6 +181,7 @@ void FacebookPhotoInterfacePrivate::emitPropertyChangeSignals(const QVariantMap 
         emit q->updatedTimeChanged();
 
 // <<< emitPropertyChangeSignals
+
     QVariantMap oldFromMap = oldData.value(FACEBOOK_ONTOLOGY_ALBUM_FROM).toMap();
     QString oldFromId = oldFromMap.value(FACEBOOK_ONTOLOGY_OBJECTREFERENCE_OBJECTIDENTIFIER).toString();
     QString oldFromName = oldFromMap.value(FACEBOOK_ONTOLOGY_OBJECTREFERENCE_OBJECTNAME).toString();
@@ -278,7 +277,7 @@ void FacebookPhotoInterfacePrivate::emitPropertyChangeSignals(const QVariantMap 
         }
         images.clear();
 
-        // Update with the new tag data
+        // Update with the new images data
         foreach (QVariant image, newImagesList) {
             QVariantMap imageMap = image.toMap();
             FacebookPhotoImageInterface *imageInterface = new FacebookPhotoImageInterface(q);
@@ -288,6 +287,23 @@ void FacebookPhotoInterfacePrivate::emitPropertyChangeSignals(const QVariantMap 
 
         // Emit change signal
         emit q->imagesChanged();
+    }
+
+    // find the source of the image item whose width and height matches the top-level width and height properties.
+    int toplevelHeight = newHeight.toInt();
+    int closestHeight = 0;
+    QUrl closestSource;
+    Q_FOREACH (FacebookPhotoImageInterface *image, images) {
+        if (qAbs(toplevelHeight - image->height()) < qAbs(toplevelHeight - closestHeight)) {
+            closestHeight = image->height();
+            closestSource = image->source();
+        }
+    }
+    if (closestSource.isEmpty()) {
+        qWarning() << "Unable to find source image url!";
+    }
+    if (closestSource != oldSource.toUrl()) {
+        emit q->sourceChanged();
     }
 
     // Check if we are in the second phase (getting info about likes and comments)
@@ -879,7 +895,20 @@ QUrl FacebookPhotoInterface::picture() const
 QUrl FacebookPhotoInterface::source() const
 {
     Q_D(const FacebookPhotoInterface);
-    return QUrl::fromEncoded(d->data().value(FACEBOOK_ONTOLOGY_PHOTO_SOURCE).toString().toLocal8Bit());
+    // find the source of the image item whose width and height matches the top-level width and height properties.
+    int height = this->height();
+    int closestHeight = 0;
+    QUrl closestSource;
+    Q_FOREACH (FacebookPhotoImageInterface *image, d->images) {
+        if (qAbs(height - image->height()) < qAbs(height - closestHeight)) {
+            closestHeight = image->height();
+            closestSource = image->source();
+        }
+    }
+    if (closestSource.isEmpty()) {
+        qWarning() << "Unable to find source image url!";
+    }
+    return closestSource;
 }
 
 /*!

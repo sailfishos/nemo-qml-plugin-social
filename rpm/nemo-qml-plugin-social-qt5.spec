@@ -40,6 +40,7 @@ rm -rf %{buildroot}
 %files
 %defattr(-,root,root,-)
 %{_libdir}/qt5/qml/org/nemomobile/social/libnemosocial.so
+%{_libdir}/qt5/qml/org/nemomobile/social/plugins.qmltypes
 %{_libdir}/qt5/qml/org/nemomobile/social/qmldir
 
 %files tests

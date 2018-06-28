@@ -8,9 +8,12 @@ equals(QT_MAJOR_VERSION, 4): target.path = $$[QT_INSTALL_IMPORTS]/$$PLUGIN_IMPOR
 equals(QT_MAJOR_VERSION, 5): target.path = $$[QT_INSTALL_QML]/$$PLUGIN_IMPORT_PATH
 INSTALLS += target
 
-qmldir.files += $$_PRO_FILE_PWD_/qmldir
+qmldir.files += qmldir plugins.qmltypes
 qmldir.path +=  $$target.path
 INSTALLS += qmldir
+
+qmltypes.commands = qmlplugindump -nonrelocatable org.nemomobile.social 1.0 > $$PWD/plugins.qmltypes
+QMAKE_EXTRA_TARGETS += qmltypes
 
 equals(QT_MAJOR_VERSION, 4): QT += declarative network
 equals(QT_MAJOR_VERSION, 5): QT += qml network

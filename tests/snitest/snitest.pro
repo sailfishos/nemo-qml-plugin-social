@@ -6,7 +6,7 @@ equals(QT_MAJOR_VERSION, 4): {
     CONFIG  += qtestlib
 }
 equals(QT_MAJOR_VERSION, 5): {
-    QT += qml network testlib
+    QT = core qml network testlib
 }
 
 

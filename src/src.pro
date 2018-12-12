@@ -16,7 +16,7 @@ qmltypes.commands = qmlplugindump -nonrelocatable org.nemomobile.social 1.0 > $$
 QMAKE_EXTRA_TARGETS += qmltypes
 
 equals(QT_MAJOR_VERSION, 4): QT += declarative network
-equals(QT_MAJOR_VERSION, 5): QT += qml network
+equals(QT_MAJOR_VERSION, 5): QT = core qml network
 
 lessThan(QT_MAJOR_VERSION, 5) {
     CONFIG += link_pkgconfig

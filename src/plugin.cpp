@@ -30,17 +30,9 @@
  */
 
 #include <QtGlobal>
-#if QT_VERSION >= QT_VERSION_CHECK(5, 0, 0)
-# include <QtQml>
-# include <QQmlEngine>
-# include <QQmlExtensionPlugin>
-# define QDeclarativeEngine QQmlEngine
-# define QDeclarativeExtensionPlugin QQmlExtensionPlugin
-#else
-# include <QtDeclarative>
-# include <QDeclarativeEngine>
-# include <QDeclarativeExtensionPlugin>
-#endif
+#include <QtQml>
+#include <QQmlEngine>
+#include <QQmlExtensionPlugin>
 
 // social plugin headers
 #include "socialnetworkinterface.h"
@@ -70,16 +62,14 @@
 #include "twitter/twittertweetinterface.h"
 
 
-class Q_DECL_EXPORT NemoSocialPlugin : public QDeclarativeExtensionPlugin
+class Q_DECL_EXPORT NemoSocialPlugin : public QQmlExtensionPlugin
 {
     Q_OBJECT
-#if QT_VERSION >= QT_VERSION_CHECK(5, 0, 0)
     Q_PLUGIN_METADATA(IID "org.nemomobile.social")
-#endif
 public:
     virtual ~NemoSocialPlugin() { }
 
-    void initializeEngine(QDeclarativeEngine *engine, const char *uri)
+    void initializeEngine(QQmlEngine *engine, const char *uri)
     {
         Q_ASSERT(uri == QLatin1String("org.nemomobile.social"));
         Q_UNUSED(engine)
@@ -131,9 +121,5 @@ public:
         qmlRegisterType<TwitterTweetInterface>(uri, 1, 0, "TwitterTweet");
     }
 };
-
-#if QT_VERSION < QT_VERSION_CHECK(5, 0, 0)
-Q_EXPORT_PLUGIN2(nemosocial, NemoSocialPlugin)
-#endif
 
 #include "plugin.moc"

@@ -134,13 +134,9 @@ QNetworkRequest TwitterInterfacePrivate::networkRequest(const QString &extraPath
                                                              oauthTokenSecret.toLocal8Bit());
 
     QUrl url (urlByteArray);
-#if QT_VERSION >= QT_VERSION_CHECK(5, 0, 0)
     QUrlQuery query;
     query.setQueryItems(queryItems);
     url.setQuery(query);
-#else
-    url.setQueryItems(queryItems);
-#endif
 
     QNetworkRequest request (url);
     request.setRawHeader(HEADER_AUTHORIZATION_KEY, header);

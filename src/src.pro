@@ -4,8 +4,7 @@ PLUGIN_IMPORT_PATH = org/nemomobile/social
 TEMPLATE = lib
 CONFIG += qt plugin hide_symbols
 
-equals(QT_MAJOR_VERSION, 4): target.path = $$[QT_INSTALL_IMPORTS]/$$PLUGIN_IMPORT_PATH
-equals(QT_MAJOR_VERSION, 5): target.path = $$[QT_INSTALL_QML]/$$PLUGIN_IMPORT_PATH
+target.path = $$[QT_INSTALL_QML]/$$PLUGIN_IMPORT_PATH
 INSTALLS += target
 
 qmldir.files += qmldir plugins.qmltypes
@@ -15,15 +14,7 @@ INSTALLS += qmldir
 qmltypes.commands = qmlplugindump -nonrelocatable org.nemomobile.social 1.0 > $$PWD/plugins.qmltypes
 QMAKE_EXTRA_TARGETS += qmltypes
 
-equals(QT_MAJOR_VERSION, 4): QT += declarative network
-equals(QT_MAJOR_VERSION, 5): QT = core qml network
-
-lessThan(QT_MAJOR_VERSION, 5) {
-    CONFIG += link_pkgconfig
-    PKGCONFIG += QJson
-}
-
-equals(QT_MAJOR_VERSION, 5): DEFINES += QT_VERSION_5
+QT = core qml network
 
 SOURCES += \
     $$PWD/plugin.cpp \

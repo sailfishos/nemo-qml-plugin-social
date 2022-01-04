@@ -57,42 +57,42 @@ public:
     int commentsCount;
 private:
     Q_DECLARE_PUBLIC(FacebookPostInterface)
-    static void to_append(QDeclarativeListProperty<FacebookObjectReferenceInterface> *list,
+    static void to_append(QQmlListProperty<FacebookObjectReferenceInterface> *list,
                           FacebookObjectReferenceInterface *data);
-    static FacebookObjectReferenceInterface * to_at(QDeclarativeListProperty<FacebookObjectReferenceInterface> *list,
+    static FacebookObjectReferenceInterface * to_at(QQmlListProperty<FacebookObjectReferenceInterface> *list,
                                                     int index);
-    static void to_clear(QDeclarativeListProperty<FacebookObjectReferenceInterface> *list);
-    static int to_count(QDeclarativeListProperty<FacebookObjectReferenceInterface> *list);
-    static void message_tags_append(QDeclarativeListProperty<FacebookNameTagInterface> *list,
+    static void to_clear(QQmlListProperty<FacebookObjectReferenceInterface> *list);
+    static int to_count(QQmlListProperty<FacebookObjectReferenceInterface> *list);
+    static void message_tags_append(QQmlListProperty<FacebookNameTagInterface> *list,
                                     FacebookNameTagInterface *data);
-    static FacebookNameTagInterface * message_tags_at(QDeclarativeListProperty<FacebookNameTagInterface> *list,
+    static FacebookNameTagInterface * message_tags_at(QQmlListProperty<FacebookNameTagInterface> *list,
                                                       int index);
-    static void message_tags_clear(QDeclarativeListProperty<FacebookNameTagInterface> *list);
-    static int message_tags_count(QDeclarativeListProperty<FacebookNameTagInterface> *list);
-    static void properties_append(QDeclarativeListProperty<FacebookPostPropertyInterface> *list,
+    static void message_tags_clear(QQmlListProperty<FacebookNameTagInterface> *list);
+    static int message_tags_count(QQmlListProperty<FacebookNameTagInterface> *list);
+    static void properties_append(QQmlListProperty<FacebookPostPropertyInterface> *list,
                                   FacebookPostPropertyInterface *data);
-    static FacebookPostPropertyInterface * properties_at(QDeclarativeListProperty<FacebookPostPropertyInterface> *list,
+    static FacebookPostPropertyInterface * properties_at(QQmlListProperty<FacebookPostPropertyInterface> *list,
                                                          int index);
-    static void properties_clear(QDeclarativeListProperty<FacebookPostPropertyInterface> *list);
-    static int properties_count(QDeclarativeListProperty<FacebookPostPropertyInterface> *list);
-    static void actions_append(QDeclarativeListProperty<FacebookPostActionInterface> *list,
+    static void properties_clear(QQmlListProperty<FacebookPostPropertyInterface> *list);
+    static int properties_count(QQmlListProperty<FacebookPostPropertyInterface> *list);
+    static void actions_append(QQmlListProperty<FacebookPostActionInterface> *list,
                                FacebookPostActionInterface *data);
-    static FacebookPostActionInterface * actions_at(QDeclarativeListProperty<FacebookPostActionInterface> *list,
+    static FacebookPostActionInterface * actions_at(QQmlListProperty<FacebookPostActionInterface> *list,
                                                     int index);
-    static void actions_clear(QDeclarativeListProperty<FacebookPostActionInterface> *list);
-    static int actions_count(QDeclarativeListProperty<FacebookPostActionInterface> *list);
-    static void story_tags_append(QDeclarativeListProperty<FacebookNameTagInterface> *list,
+    static void actions_clear(QQmlListProperty<FacebookPostActionInterface> *list);
+    static int actions_count(QQmlListProperty<FacebookPostActionInterface> *list);
+    static void story_tags_append(QQmlListProperty<FacebookNameTagInterface> *list,
                                   FacebookNameTagInterface *data);
-    static FacebookNameTagInterface * story_tags_at(QDeclarativeListProperty<FacebookNameTagInterface> *list,
+    static FacebookNameTagInterface * story_tags_at(QQmlListProperty<FacebookNameTagInterface> *list,
                                                     int index);
-    static void story_tags_clear(QDeclarativeListProperty<FacebookNameTagInterface> *list);
-    static int story_tags_count(QDeclarativeListProperty<FacebookNameTagInterface> *list);
-    static void with_tags_append(QDeclarativeListProperty<FacebookObjectReferenceInterface> *list,
+    static void story_tags_clear(QQmlListProperty<FacebookNameTagInterface> *list);
+    static int story_tags_count(QQmlListProperty<FacebookNameTagInterface> *list);
+    static void with_tags_append(QQmlListProperty<FacebookObjectReferenceInterface> *list,
                                  FacebookObjectReferenceInterface *data);
-    static FacebookObjectReferenceInterface * with_tags_at(QDeclarativeListProperty<FacebookObjectReferenceInterface> *list,
+    static FacebookObjectReferenceInterface * with_tags_at(QQmlListProperty<FacebookObjectReferenceInterface> *list,
                                                            int index);
-    static void with_tags_clear(QDeclarativeListProperty<FacebookObjectReferenceInterface> *list);
-    static int with_tags_count(QDeclarativeListProperty<FacebookObjectReferenceInterface> *list);
+    static void with_tags_clear(QQmlListProperty<FacebookObjectReferenceInterface> *list);
+    static int with_tags_count(QQmlListProperty<FacebookObjectReferenceInterface> *list);
 };
 
 #endif // FACEBOOKPOSTINTERFACE_P_H

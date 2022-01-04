@@ -58,16 +58,16 @@ private:
     static QHash<int, QByteArray> roleNames();
 
     // Filters and sorters
-    static void filters_append(QDeclarativeListProperty<FilterInterface> *list, FilterInterface *filter);
-    static FilterInterface *filters_at(QDeclarativeListProperty<FilterInterface> *list, int index);
-    static void filters_clear(QDeclarativeListProperty<FilterInterface> *list);
-    static int filters_count(QDeclarativeListProperty<FilterInterface> *list);
+    static void filters_append(QQmlListProperty<FilterInterface> *list, FilterInterface *filter);
+    static FilterInterface *filters_at(QQmlListProperty<FilterInterface> *list, int index);
+    static void filters_clear(QQmlListProperty<FilterInterface> *list);
+    static int filters_count(QQmlListProperty<FilterInterface> *list);
     QList<FilterInterface*> filters;
 
-    static void sorters_append(QDeclarativeListProperty<SorterInterface> *list, SorterInterface *sorter);
-    static SorterInterface *sorters_at(QDeclarativeListProperty<SorterInterface> *list, int index);
-    static void sorters_clear(QDeclarativeListProperty<SorterInterface> *list);
-    static int sorters_count(QDeclarativeListProperty<SorterInterface> *list);
+    static void sorters_append(QQmlListProperty<SorterInterface> *list, SorterInterface *sorter);
+    static SorterInterface *sorters_at(QQmlListProperty<SorterInterface> *list, int index);
+    static void sorters_clear(QQmlListProperty<SorterInterface> *list);
+    static int sorters_count(QQmlListProperty<SorterInterface> *list);
     QList<SorterInterface*> sorters;
 
     void resort();

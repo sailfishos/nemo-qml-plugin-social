@@ -36,11 +36,7 @@
 #include "socialnetworkinterface.h"
 
 #include <QtDebug>
-#if (QT_VERSION < QT_VERSION_CHECK(5, 0, 0))
-#include <qjson/parser.h>
-#else
 #include <QJsonDocument>
-#endif
 
 ContentItemInterfacePrivate::ContentItemInterfacePrivate(ContentItemInterface *q)
     : socialNetworkInterface(0), isInitialized(false), q_ptr(q)
@@ -103,14 +99,6 @@ QVariant ContentItemInterfacePrivate::parseReplyDataVariant(const QByteArray &re
 {
     QVariant parsed;
 
-#if (QT_VERSION < QT_VERSION_CHECK(5, 0, 0))
-    QJson::Parser jsonParser;
-    parsed = jsonParser.parse(replyData, ok);
-    if (!*ok) {
-        qWarning() << Q_FUNC_INFO << "Error parsing JSON file:" << jsonParser.errorString()
-                   << "at" << jsonParser.errorLine();
-    }
-#else
     QJsonParseError jsonError;
     QJsonDocument jsonDocument = QJsonDocument::fromJson(replyData, &jsonError);
     *ok = !jsonDocument.isEmpty();
@@ -119,7 +107,6 @@ QVariant ContentItemInterfacePrivate::parseReplyDataVariant(const QByteArray &re
                    << "at" << jsonError.offset;
     }
     parsed = jsonDocument.toVariant();
-#endif
 
     if (!*ok) {
         parsed.clear();

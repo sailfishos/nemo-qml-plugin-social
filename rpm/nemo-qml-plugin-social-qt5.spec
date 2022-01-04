@@ -1,9 +1,8 @@
 Name:       nemo-qml-plugin-social-qt5
 
 Summary:    Social plugin for Nemo Mobile
-Version:    0.0.0
+Version:    0.1.3
 Release:    1
-Group:      System/Libraries
 License:    BSD
 URL:        https://git.merproject.org/mer-core/nemo-qml-plugin-social
 Source0:    %{name}-%{version}.tar.bz2
@@ -30,14 +29,14 @@ This package includes the unit tests.
 %build
 %qmake5 
 
-make %{?jobs:-j%jobs}
+%make_build
 
 %install
-rm -rf %{buildroot}
 %qmake5_install
 
 %files
 %defattr(-,root,root,-)
+%license LICENSE.BSD
 %{_libdir}/qt5/qml/org/nemomobile/social/libnemosocial.so
 %{_libdir}/qt5/qml/org/nemomobile/social/plugins.qmltypes
 %{_libdir}/qt5/qml/org/nemomobile/social/qmldir

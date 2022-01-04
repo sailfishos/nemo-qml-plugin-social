@@ -34,12 +34,8 @@
 
 #include "identifiablecontentiteminterface.h"
 
-#if QT_VERSION_5
 #include <QtQml/QQmlListProperty>
-#define QDeclarativeListProperty QQmlListProperty
-#else
-#include <QtDeclarative/QDeclarativeListProperty>
-#endif
+
 #include "facebookobjectreferenceinterface.h"
 #include <QtCore/QString>
 #include "facebooknametaginterface.h"
@@ -58,22 +54,22 @@ class FacebookPostInterface: public IdentifiableContentItemInterface
 {
     Q_OBJECT
     Q_PROPERTY(FacebookObjectReferenceInterface * from READ from NOTIFY fromChanged)
-    Q_PROPERTY(QDeclarativeListProperty<FacebookObjectReferenceInterface> to READ to NOTIFY toChanged)
+    Q_PROPERTY(QQmlListProperty<FacebookObjectReferenceInterface> to READ to NOTIFY toChanged)
     Q_PROPERTY(QString message READ message NOTIFY messageChanged)
-    Q_PROPERTY(QDeclarativeListProperty<FacebookNameTagInterface> messageTags READ messageTags NOTIFY messageTagsChanged)
+    Q_PROPERTY(QQmlListProperty<FacebookNameTagInterface> messageTags READ messageTags NOTIFY messageTagsChanged)
     Q_PROPERTY(QUrl picture READ picture NOTIFY pictureChanged)
     Q_PROPERTY(QUrl link READ link NOTIFY linkChanged)
     Q_PROPERTY(QString name READ name NOTIFY nameChanged)
     Q_PROPERTY(QString caption READ caption NOTIFY captionChanged)
     Q_PROPERTY(QString description READ description NOTIFY descriptionChanged)
     Q_PROPERTY(QUrl source READ source NOTIFY sourceChanged)
-    Q_PROPERTY(QDeclarativeListProperty<FacebookPostPropertyInterface> properties READ properties NOTIFY propertiesChanged)
+    Q_PROPERTY(QQmlListProperty<FacebookPostPropertyInterface> properties READ properties NOTIFY propertiesChanged)
     Q_PROPERTY(QUrl icon READ icon NOTIFY iconChanged)
-    Q_PROPERTY(QDeclarativeListProperty<FacebookPostActionInterface> actions READ actions NOTIFY actionsChanged)
+    Q_PROPERTY(QQmlListProperty<FacebookPostActionInterface> actions READ actions NOTIFY actionsChanged)
     Q_PROPERTY(QString postType READ postType NOTIFY postTypeChanged)
     Q_PROPERTY(QString story READ story NOTIFY storyChanged)
-    Q_PROPERTY(QDeclarativeListProperty<FacebookNameTagInterface> storyTags READ storyTags NOTIFY storyTagsChanged)
-    Q_PROPERTY(QDeclarativeListProperty<FacebookObjectReferenceInterface> withTags READ withTags NOTIFY withTagsChanged)
+    Q_PROPERTY(QQmlListProperty<FacebookNameTagInterface> storyTags READ storyTags NOTIFY storyTagsChanged)
+    Q_PROPERTY(QQmlListProperty<FacebookObjectReferenceInterface> withTags READ withTags NOTIFY withTagsChanged)
     Q_PROPERTY(QString objectIdentifier READ objectIdentifier NOTIFY objectIdentifierChanged)
     Q_PROPERTY(FacebookObjectReferenceInterface * application READ application NOTIFY applicationChanged)
     Q_PROPERTY(QString createdTime READ createdTime NOTIFY createdTimeChanged)
@@ -100,22 +96,22 @@ public:
 
     // Accessors
     FacebookObjectReferenceInterface * from() const;
-    QDeclarativeListProperty<FacebookObjectReferenceInterface> to();
+    QQmlListProperty<FacebookObjectReferenceInterface> to();
     QString message() const;
-    QDeclarativeListProperty<FacebookNameTagInterface> messageTags();
+    QQmlListProperty<FacebookNameTagInterface> messageTags();
     QUrl picture() const;
     QUrl link() const;
     QString name() const;
     QString caption() const;
     QString description() const;
     QUrl source() const;
-    QDeclarativeListProperty<FacebookPostPropertyInterface> properties();
+    QQmlListProperty<FacebookPostPropertyInterface> properties();
     QUrl icon() const;
-    QDeclarativeListProperty<FacebookPostActionInterface> actions();
+    QQmlListProperty<FacebookPostActionInterface> actions();
     QString postType() const;
     QString story() const;
-    QDeclarativeListProperty<FacebookNameTagInterface> storyTags();
-    QDeclarativeListProperty<FacebookObjectReferenceInterface> withTags();
+    QQmlListProperty<FacebookNameTagInterface> storyTags();
+    QQmlListProperty<FacebookObjectReferenceInterface> withTags();
     QString objectIdentifier() const;
     FacebookObjectReferenceInterface * application() const;
     QString createdTime() const;

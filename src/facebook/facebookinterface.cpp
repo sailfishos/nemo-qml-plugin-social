@@ -606,13 +606,9 @@ QUrl FacebookInterfacePrivate::requestUrl(const QString &objectId, const QString
         returnedUrl.setPath(QLatin1String("/v2.6/") + objectId);
     else
         returnedUrl.setPath(QLatin1String("/v2.6/") + objectId + QLatin1String("/") + extraPath);
-#if QT_VERSION >= QT_VERSION_CHECK(5, 0, 0)
     QUrlQuery query;
     query.setQueryItems(queryItems);
     returnedUrl.setQuery(query);
-#else
-    returnedUrl.setQueryItems(queryItems);
-#endif
     return returnedUrl;
 }
 
@@ -1126,12 +1122,8 @@ bool FacebookInterfacePrivate::tryAddCacheEntryFromData(CacheNodePrivate::Status
         // If not, we should parse the next and previous url and extract relevant data
         QUrl previousUrl = QUrl(pagingMap.value(FACEBOOK_ONTOLOGY_METADATA_PAGING_PREVIOUS).toString());
 
-#if QT_VERSION < QT_VERSION_CHECK(5, 0, 0)
-        QList<QPair<QString, QString> > previousQueries = previousUrl.queryItems();
-#else
         QUrlQuery query (previousUrl);
         QList<QPair<QString, QString> > previousQueries = query.queryItems();
-#endif
         QList<QPair<QString, QString> >::const_iterator i;
 
         for (i = previousQueries.begin(); i != previousQueries.end(); ++ i) {
@@ -1142,12 +1134,8 @@ bool FacebookInterfacePrivate::tryAddCacheEntryFromData(CacheNodePrivate::Status
         }
 
         QUrl nextUrl = QUrl(pagingMap.value(FACEBOOK_ONTOLOGY_METADATA_PAGING_NEXT).toString());
-#if QT_VERSION < QT_VERSION_CHECK(5, 0, 0)
-        QList<QPair<QString, QString> > nextQueries = nextUrl.queryItems();
-#else
         query = QUrlQuery(nextUrl);
         QList<QPair<QString, QString> > nextQueries = query.queryItems();
-#endif
 
         for (i = nextQueries.begin(); i != nextQueries.end(); ++ i) {
             if (i->first == FACEBOOK_ONTOLOGY_METADATA_PAGING_OFFSET

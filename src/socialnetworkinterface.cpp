@@ -689,13 +689,9 @@ bool ArbitraryRequestHandler::request(SocialNetworkInterface::RequestType reques
     }
 
     QUrl url(requestUri);
-#if QT_VERSION >= QT_VERSION_CHECK(5, 0, 0)
     QUrlQuery query;
     query.setQueryItems(formattedQueryItems);
     url.setQuery(query);
-#else
-    url.setQueryItems(formattedQueryItems);
-#endif
     QNetworkReply *newReply = 0;
     switch (requestType) {
         case SocialNetworkInterface::PostRequest:{

@@ -53,24 +53,24 @@ public:
     int commentsCount;
 private:
     Q_DECLARE_PUBLIC(FacebookPhotoInterface)
-    static void tags_append(QDeclarativeListProperty<FacebookPhotoTagInterface> *list,
+    static void tags_append(QQmlListProperty<FacebookPhotoTagInterface> *list,
                             FacebookPhotoTagInterface *data);
-    static FacebookPhotoTagInterface * tags_at(QDeclarativeListProperty<FacebookPhotoTagInterface> *list,
+    static FacebookPhotoTagInterface * tags_at(QQmlListProperty<FacebookPhotoTagInterface> *list,
                                                int index);
-    static void tags_clear(QDeclarativeListProperty<FacebookPhotoTagInterface> *list);
-    static int tags_count(QDeclarativeListProperty<FacebookPhotoTagInterface> *list);
-    static void name_tags_append(QDeclarativeListProperty<FacebookNameTagInterface> *list,
+    static void tags_clear(QQmlListProperty<FacebookPhotoTagInterface> *list);
+    static int tags_count(QQmlListProperty<FacebookPhotoTagInterface> *list);
+    static void name_tags_append(QQmlListProperty<FacebookNameTagInterface> *list,
                                  FacebookNameTagInterface *data);
-    static FacebookNameTagInterface * name_tags_at(QDeclarativeListProperty<FacebookNameTagInterface> *list,
+    static FacebookNameTagInterface * name_tags_at(QQmlListProperty<FacebookNameTagInterface> *list,
                                                    int index);
-    static void name_tags_clear(QDeclarativeListProperty<FacebookNameTagInterface> *list);
-    static int name_tags_count(QDeclarativeListProperty<FacebookNameTagInterface> *list);
-    static void images_append(QDeclarativeListProperty<FacebookPhotoImageInterface> *list,
+    static void name_tags_clear(QQmlListProperty<FacebookNameTagInterface> *list);
+    static int name_tags_count(QQmlListProperty<FacebookNameTagInterface> *list);
+    static void images_append(QQmlListProperty<FacebookPhotoImageInterface> *list,
                               FacebookPhotoImageInterface *data);
-    static FacebookPhotoImageInterface * images_at(QDeclarativeListProperty<FacebookPhotoImageInterface> *list,
+    static FacebookPhotoImageInterface * images_at(QQmlListProperty<FacebookPhotoImageInterface> *list,
                                                    int index);
-    static void images_clear(QDeclarativeListProperty<FacebookPhotoImageInterface> *list);
-    static int images_count(QDeclarativeListProperty<FacebookPhotoImageInterface> *list);
+    static void images_clear(QQmlListProperty<FacebookPhotoImageInterface> *list);
+    static int images_count(QQmlListProperty<FacebookPhotoImageInterface> *list);
 private:
     int pendingTagToRemoveIndex;
 };

@@ -1,21 +1,7 @@
 TEMPLATE = app
 TARGET = multimodeltest
 
-equals(QT_MAJOR_VERSION, 4): {
-    QT += declarative network
-    CONFIG  += qtestlib
-}
-equals(QT_MAJOR_VERSION, 5): {
-    QT = core qml network testlib
-}
-
-
-lessThan(QT_MAJOR_VERSION, 5) {
-    CONFIG += link_pkgconfig
-    PKGCONFIG += QJson
-}
-
-equals(QT_MAJOR_VERSION, 5): DEFINES += QT_VERSION_5
+QT = core qml network testlib
 
 INCLUDEPATH += ../../src/
 

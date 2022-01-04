@@ -38,14 +38,8 @@
 #include <QtCore/QVariantMap>
 
 #include <QtGlobal>
-#if QT_VERSION_5
 #include <QtQml>
 #include <QQmlParserStatus>
-#define QDeclarativeParserStatus QQmlParserStatus
-#else
-#include <qdeclarative.h>
-#include <QDeclarativeParserStatus>
-#endif
 
 class IdentifiableContentItemInterface;
 class SocialNetworkInterface;
@@ -66,10 +60,10 @@ class SocialNetworkInterface;
  */
 
 class ContentItemInterfacePrivate;
-class ContentItemInterface : public QObject, public QDeclarativeParserStatus
+class ContentItemInterface : public QObject, public QQmlParserStatus
 {
     Q_OBJECT
-    Q_INTERFACES(QDeclarativeParserStatus)
+    Q_INTERFACES(QQmlParserStatus)
 
     Q_PROPERTY(SocialNetworkInterface *socialNetwork READ socialNetwork WRITE setSocialNetwork
                NOTIFY socialNetworkChanged)
@@ -81,7 +75,7 @@ public:
     explicit ContentItemInterface(QObject *parent = 0);
     virtual ~ContentItemInterface();
 
-    // QDeclarativeParserStatus
+    // QQmlParserStatus
     void classBegin();
     void componentComplete();
 

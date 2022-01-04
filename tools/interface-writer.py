@@ -58,7 +58,7 @@ def getType(property, listPrivate = False):
     type = property.type
     if property.isList:
         if not listPrivate:
-            return "QDeclarativeListProperty<" + type + ">"
+            return "QQmlListProperty<" + type + ">"
         else:
             return "QList<" + type + " *>"
         
@@ -102,12 +102,7 @@ def generate(structure_file):
         if property.isList:
             hasLists = True
     if hasLists:
-        header += "#if QT_VERSION_5\n"
         header += "#include <QtQml/QQmlListProperty>\n"
-        header += "#define QDeclarativeListProperty QQmlListProperty\n"
-        header += "#else\n"
-        header += "#include <QtDeclarative/QDeclarativeListProperty>\n"
-        header += "#endif\n"
 
     # Get a list of the includes that will be used
     includeList = []
@@ -613,7 +608,7 @@ const QVariantMap &newData);\n"
             source += indent(typehelper.convert(type, line), 1) + "\n"
         else:
             if property.isList:
-                source += "    return QDeclarativeListProperty<" + property.type + ">(\n"
+                source += "    return QQmlListProperty<" + property.type + ">(\n"
                 source += "                this, 0,\n"
                 source += "                &" + className + "Private::" + property.name + "_append,\n"
                 source += "                &" + className + "Private::" + property.name + "_count,\n"

@@ -36,17 +36,9 @@
 #include <QtCore/QObject>
 
 #include <QtGlobal>
-#if QT_VERSION_5
 #include <QtQml>
 #include <QQmlParserStatus>
 #include <QQmlListProperty>
-#define QDeclarativeParserStatus QQmlParserStatus
-#define QDeclarativeListProperty QQmlListProperty
-#else
-#include <qdeclarative.h>
-#include <QDeclarativeParserStatus>
-#include <QDeclarativeListProperty>
-#endif
 
 #include "filterinterface.h"
 #include "sorterinterface.h"
@@ -65,10 +57,10 @@ class IdentifiableContentItemInterface;
 class CacheEntry;
 class SocialNetworkModelInterface;
 class SocialNetworkInterfacePrivate;
-class SocialNetworkInterface : public QObject, public QDeclarativeParserStatus
+class SocialNetworkInterface : public QObject, public QQmlParserStatus
 {
     Q_OBJECT
-    Q_INTERFACES(QDeclarativeParserStatus)
+    Q_INTERFACES(QQmlParserStatus)
     Q_PROPERTY(bool initialized READ isInitialized NOTIFY initializedChanged)
 
     Q_ENUMS(Status)
@@ -116,7 +108,7 @@ public:
     virtual ~SocialNetworkInterface();
     bool isInitialized() const;
 
-    // QDeclarativeParserStatus
+    // QQmlParserStatus
     virtual void classBegin();
     virtual void componentComplete();
 

@@ -55,10 +55,6 @@ SocialNetworkModelInterfacePrivate::~SocialNetworkModelInterfacePrivate()
 
 void SocialNetworkModelInterfacePrivate::init()
 {
-#if QT_VERSION < QT_VERSION_CHECK(5, 0, 0)
-    Q_Q(SocialNetworkModelInterface);
-    q->setRoleNames(roleNames());
-#endif
 }
 
 QHash<int, QByteArray> SocialNetworkModelInterfacePrivate::roleNames()
@@ -73,7 +69,7 @@ QHash<int, QByteArray> SocialNetworkModelInterfacePrivate::roleNames()
 }
 
 /*! \internal */
-void SocialNetworkModelInterfacePrivate::filters_append(QDeclarativeListProperty<FilterInterface> *list,
+void SocialNetworkModelInterfacePrivate::filters_append(QQmlListProperty<FilterInterface> *list,
                                                         FilterInterface *filter)
 {
     SocialNetworkModelInterface *model = qobject_cast<SocialNetworkModelInterface *>(list->object);
@@ -83,7 +79,7 @@ void SocialNetworkModelInterfacePrivate::filters_append(QDeclarativeListProperty
 }
 
 /*! \internal */
-FilterInterface *SocialNetworkModelInterfacePrivate::filters_at(QDeclarativeListProperty<FilterInterface> *list, int index)
+FilterInterface *SocialNetworkModelInterfacePrivate::filters_at(QQmlListProperty<FilterInterface> *list, int index)
 {
     SocialNetworkModelInterface *model = qobject_cast<SocialNetworkModelInterface *>(list->object);
     if (model && model->d_func()->filters.count() > index && index >= 0)
@@ -92,7 +88,7 @@ FilterInterface *SocialNetworkModelInterfacePrivate::filters_at(QDeclarativeList
 }
 
 /*! \internal */
-void SocialNetworkModelInterfacePrivate::filters_clear(QDeclarativeListProperty<FilterInterface> *list)
+void SocialNetworkModelInterfacePrivate::filters_clear(QQmlListProperty<FilterInterface> *list)
 {
     SocialNetworkModelInterface *model = qobject_cast<SocialNetworkModelInterface *>(list->object);
     if (model) {
@@ -101,7 +97,7 @@ void SocialNetworkModelInterfacePrivate::filters_clear(QDeclarativeListProperty<
 }
 
 /*! \internal */
-int SocialNetworkModelInterfacePrivate::filters_count(QDeclarativeListProperty<FilterInterface> *list)
+int SocialNetworkModelInterfacePrivate::filters_count(QQmlListProperty<FilterInterface> *list)
 {
     SocialNetworkModelInterface *model = qobject_cast<SocialNetworkModelInterface *>(list->object);
     if (model)
@@ -110,7 +106,7 @@ int SocialNetworkModelInterfacePrivate::filters_count(QDeclarativeListProperty<F
 }
 
 /*! \internal */
-void SocialNetworkModelInterfacePrivate::sorters_append(QDeclarativeListProperty<SorterInterface> *list,
+void SocialNetworkModelInterfacePrivate::sorters_append(QQmlListProperty<SorterInterface> *list,
                                                    SorterInterface *sorter)
 {
     SocialNetworkModelInterface *model = qobject_cast<SocialNetworkModelInterface *>(list->object);
@@ -126,7 +122,7 @@ void SocialNetworkModelInterfacePrivate::sorters_append(QDeclarativeListProperty
 }
 
 /*! \internal */
-SorterInterface *SocialNetworkModelInterfacePrivate::sorters_at(QDeclarativeListProperty<SorterInterface> *list, int index)
+SorterInterface *SocialNetworkModelInterfacePrivate::sorters_at(QQmlListProperty<SorterInterface> *list, int index)
 {
     SocialNetworkModelInterface *model = qobject_cast<SocialNetworkModelInterface *>(list->object);
     if (model && model->d_func()->sorters.count() > index && index >= 0)
@@ -135,7 +131,7 @@ SorterInterface *SocialNetworkModelInterfacePrivate::sorters_at(QDeclarativeList
 }
 
 /*! \internal */
-void SocialNetworkModelInterfacePrivate::sorters_clear(QDeclarativeListProperty<SorterInterface> *list)
+void SocialNetworkModelInterfacePrivate::sorters_clear(QQmlListProperty<SorterInterface> *list)
 {
     SocialNetworkModelInterface *model = qobject_cast<SocialNetworkModelInterface *>(list->object);
     if (model) {
@@ -148,7 +144,7 @@ void SocialNetworkModelInterfacePrivate::sorters_clear(QDeclarativeListProperty<
 }
 
 /*! \internal */
-int SocialNetworkModelInterfacePrivate::sorters_count(QDeclarativeListProperty<SorterInterface> *list)
+int SocialNetworkModelInterfacePrivate::sorters_count(QQmlListProperty<SorterInterface> *list)
 {
     SocialNetworkModelInterface *model = qobject_cast<SocialNetworkModelInterface *>(list->object);
     if (model)
@@ -639,9 +635,9 @@ bool SocialNetworkModelInterface::hasNext() const
     Specific implementations of the SocialNetwork interface may not support
     certain standard filters types, or they may not support filtering at all.
 */
-QDeclarativeListProperty<FilterInterface> SocialNetworkModelInterface::filters()
+QQmlListProperty<FilterInterface> SocialNetworkModelInterface::filters()
 {
-    return QDeclarativeListProperty<FilterInterface>(this, 0,
+    return QQmlListProperty<FilterInterface>(this, 0,
             &SocialNetworkModelInterfacePrivate::filters_append,
             &SocialNetworkModelInterfacePrivate::filters_count,
             &SocialNetworkModelInterfacePrivate::filters_at,
@@ -658,9 +654,9 @@ QDeclarativeListProperty<FilterInterface> SocialNetworkModelInterface::filters()
     Specific implementations of the SocialNetwork interface may not support
     certain standard sorter types, or they may not support sorting at all.
 */
-QDeclarativeListProperty<SorterInterface> SocialNetworkModelInterface::sorters()
+QQmlListProperty<SorterInterface> SocialNetworkModelInterface::sorters()
 {
-    return QDeclarativeListProperty<SorterInterface>(this, 0,
+    return QQmlListProperty<SorterInterface>(this, 0,
             &SocialNetworkModelInterfacePrivate::sorters_append,
             &SocialNetworkModelInterfacePrivate::sorters_count,
             &SocialNetworkModelInterfacePrivate::sorters_at,
@@ -812,12 +808,10 @@ void SocialNetworkModelInterface::clean()
     d->clean();
 }
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 0, 0)
 QHash<int, QByteArray> SocialNetworkModelInterface::roleNames() const
 {
     return SocialNetworkModelInterfacePrivate::roleNames();
 }
-#endif
 
 bool SocialNetworkModelInterface::event(QEvent *e)
 {

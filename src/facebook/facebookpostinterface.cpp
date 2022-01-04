@@ -447,7 +447,7 @@ void FacebookPostInterfacePrivate::emitPropertyChangeSignals(const QVariantMap &
                          newData.value(FACEBOOK_ONTOLOGY_METADATA_ID));
     IdentifiableContentItemInterfacePrivate::emitPropertyChangeSignals(oldDataWithId, newDataWithId);
 }
-void FacebookPostInterfacePrivate::to_append(QDeclarativeListProperty<FacebookObjectReferenceInterface> *list,
+void FacebookPostInterfacePrivate::to_append(QQmlListProperty<FacebookObjectReferenceInterface> *list,
                                              FacebookObjectReferenceInterface *data)
 {
     FacebookPostInterface *interface = qobject_cast<FacebookPostInterface *>(list->object);
@@ -457,7 +457,7 @@ void FacebookPostInterfacePrivate::to_append(QDeclarativeListProperty<FacebookOb
     }
 }
 
-FacebookObjectReferenceInterface * FacebookPostInterfacePrivate::to_at(QDeclarativeListProperty<FacebookObjectReferenceInterface> *list,
+FacebookObjectReferenceInterface * FacebookPostInterfacePrivate::to_at(QQmlListProperty<FacebookObjectReferenceInterface> *list,
                                                                        int index)
 {
     FacebookPostInterface *interface = qobject_cast<FacebookPostInterface *>(list->object);
@@ -469,7 +469,7 @@ FacebookObjectReferenceInterface * FacebookPostInterfacePrivate::to_at(QDeclarat
     return 0;
 }
 
-void FacebookPostInterfacePrivate::to_clear(QDeclarativeListProperty<FacebookObjectReferenceInterface> *list)
+void FacebookPostInterfacePrivate::to_clear(QQmlListProperty<FacebookObjectReferenceInterface> *list)
 {
     FacebookPostInterface *interface = qobject_cast<FacebookPostInterface *>(list->object);
     if (interface) {
@@ -480,7 +480,7 @@ void FacebookPostInterfacePrivate::to_clear(QDeclarativeListProperty<FacebookObj
     }
 }
 
-int FacebookPostInterfacePrivate::to_count(QDeclarativeListProperty<FacebookObjectReferenceInterface> *list)
+int FacebookPostInterfacePrivate::to_count(QQmlListProperty<FacebookObjectReferenceInterface> *list)
 {
     FacebookPostInterface *interface = qobject_cast<FacebookPostInterface *>(list->object);
     if (interface) {
@@ -489,7 +489,7 @@ int FacebookPostInterfacePrivate::to_count(QDeclarativeListProperty<FacebookObje
     return 0;
 }
 
-void FacebookPostInterfacePrivate::message_tags_append(QDeclarativeListProperty<FacebookNameTagInterface> *list,
+void FacebookPostInterfacePrivate::message_tags_append(QQmlListProperty<FacebookNameTagInterface> *list,
                                                        FacebookNameTagInterface *data)
 {
     FacebookPostInterface *interface = qobject_cast<FacebookPostInterface *>(list->object);
@@ -499,7 +499,7 @@ void FacebookPostInterfacePrivate::message_tags_append(QDeclarativeListProperty<
     }
 }
 
-FacebookNameTagInterface * FacebookPostInterfacePrivate::message_tags_at(QDeclarativeListProperty<FacebookNameTagInterface> *list,
+FacebookNameTagInterface * FacebookPostInterfacePrivate::message_tags_at(QQmlListProperty<FacebookNameTagInterface> *list,
                                                                          int index)
 {
     FacebookPostInterface *interface = qobject_cast<FacebookPostInterface *>(list->object);
@@ -511,7 +511,7 @@ FacebookNameTagInterface * FacebookPostInterfacePrivate::message_tags_at(QDeclar
     return 0;
 }
 
-void FacebookPostInterfacePrivate::message_tags_clear(QDeclarativeListProperty<FacebookNameTagInterface> *list)
+void FacebookPostInterfacePrivate::message_tags_clear(QQmlListProperty<FacebookNameTagInterface> *list)
 {
     FacebookPostInterface *interface = qobject_cast<FacebookPostInterface *>(list->object);
     if (interface) {
@@ -522,7 +522,7 @@ void FacebookPostInterfacePrivate::message_tags_clear(QDeclarativeListProperty<F
     }
 }
 
-int FacebookPostInterfacePrivate::message_tags_count(QDeclarativeListProperty<FacebookNameTagInterface> *list)
+int FacebookPostInterfacePrivate::message_tags_count(QQmlListProperty<FacebookNameTagInterface> *list)
 {
     FacebookPostInterface *interface = qobject_cast<FacebookPostInterface *>(list->object);
     if (interface) {
@@ -531,7 +531,7 @@ int FacebookPostInterfacePrivate::message_tags_count(QDeclarativeListProperty<Fa
     return 0;
 }
 
-void FacebookPostInterfacePrivate::properties_append(QDeclarativeListProperty<FacebookPostPropertyInterface> *list,
+void FacebookPostInterfacePrivate::properties_append(QQmlListProperty<FacebookPostPropertyInterface> *list,
                                                      FacebookPostPropertyInterface *data)
 {
     FacebookPostInterface *interface = qobject_cast<FacebookPostInterface *>(list->object);
@@ -541,7 +541,7 @@ void FacebookPostInterfacePrivate::properties_append(QDeclarativeListProperty<Fa
     }
 }
 
-FacebookPostPropertyInterface * FacebookPostInterfacePrivate::properties_at(QDeclarativeListProperty<FacebookPostPropertyInterface> *list,
+FacebookPostPropertyInterface * FacebookPostInterfacePrivate::properties_at(QQmlListProperty<FacebookPostPropertyInterface> *list,
                                                                             int index)
 {
     FacebookPostInterface *interface = qobject_cast<FacebookPostInterface *>(list->object);
@@ -553,7 +553,7 @@ FacebookPostPropertyInterface * FacebookPostInterfacePrivate::properties_at(QDec
     return 0;
 }
 
-void FacebookPostInterfacePrivate::properties_clear(QDeclarativeListProperty<FacebookPostPropertyInterface> *list)
+void FacebookPostInterfacePrivate::properties_clear(QQmlListProperty<FacebookPostPropertyInterface> *list)
 {
     FacebookPostInterface *interface = qobject_cast<FacebookPostInterface *>(list->object);
     if (interface) {
@@ -564,7 +564,7 @@ void FacebookPostInterfacePrivate::properties_clear(QDeclarativeListProperty<Fac
     }
 }
 
-int FacebookPostInterfacePrivate::properties_count(QDeclarativeListProperty<FacebookPostPropertyInterface> *list)
+int FacebookPostInterfacePrivate::properties_count(QQmlListProperty<FacebookPostPropertyInterface> *list)
 {
     FacebookPostInterface *interface = qobject_cast<FacebookPostInterface *>(list->object);
     if (interface) {
@@ -573,7 +573,7 @@ int FacebookPostInterfacePrivate::properties_count(QDeclarativeListProperty<Face
     return 0;
 }
 
-void FacebookPostInterfacePrivate::actions_append(QDeclarativeListProperty<FacebookPostActionInterface> *list,
+void FacebookPostInterfacePrivate::actions_append(QQmlListProperty<FacebookPostActionInterface> *list,
                                                   FacebookPostActionInterface *data)
 {
     FacebookPostInterface *interface = qobject_cast<FacebookPostInterface *>(list->object);
@@ -583,7 +583,7 @@ void FacebookPostInterfacePrivate::actions_append(QDeclarativeListProperty<Faceb
     }
 }
 
-FacebookPostActionInterface * FacebookPostInterfacePrivate::actions_at(QDeclarativeListProperty<FacebookPostActionInterface> *list,
+FacebookPostActionInterface * FacebookPostInterfacePrivate::actions_at(QQmlListProperty<FacebookPostActionInterface> *list,
                                                                        int index)
 {
     FacebookPostInterface *interface = qobject_cast<FacebookPostInterface *>(list->object);
@@ -595,7 +595,7 @@ FacebookPostActionInterface * FacebookPostInterfacePrivate::actions_at(QDeclarat
     return 0;
 }
 
-void FacebookPostInterfacePrivate::actions_clear(QDeclarativeListProperty<FacebookPostActionInterface> *list)
+void FacebookPostInterfacePrivate::actions_clear(QQmlListProperty<FacebookPostActionInterface> *list)
 {
     FacebookPostInterface *interface = qobject_cast<FacebookPostInterface *>(list->object);
     if (interface) {
@@ -606,7 +606,7 @@ void FacebookPostInterfacePrivate::actions_clear(QDeclarativeListProperty<Facebo
     }
 }
 
-int FacebookPostInterfacePrivate::actions_count(QDeclarativeListProperty<FacebookPostActionInterface> *list)
+int FacebookPostInterfacePrivate::actions_count(QQmlListProperty<FacebookPostActionInterface> *list)
 {
     FacebookPostInterface *interface = qobject_cast<FacebookPostInterface *>(list->object);
     if (interface) {
@@ -615,7 +615,7 @@ int FacebookPostInterfacePrivate::actions_count(QDeclarativeListProperty<Faceboo
     return 0;
 }
 
-void FacebookPostInterfacePrivate::story_tags_append(QDeclarativeListProperty<FacebookNameTagInterface> *list,
+void FacebookPostInterfacePrivate::story_tags_append(QQmlListProperty<FacebookNameTagInterface> *list,
                                                      FacebookNameTagInterface *data)
 {
     FacebookPostInterface *interface = qobject_cast<FacebookPostInterface *>(list->object);
@@ -625,7 +625,7 @@ void FacebookPostInterfacePrivate::story_tags_append(QDeclarativeListProperty<Fa
     }
 }
 
-FacebookNameTagInterface * FacebookPostInterfacePrivate::story_tags_at(QDeclarativeListProperty<FacebookNameTagInterface> *list,
+FacebookNameTagInterface * FacebookPostInterfacePrivate::story_tags_at(QQmlListProperty<FacebookNameTagInterface> *list,
                                                                        int index)
 {
     FacebookPostInterface *interface = qobject_cast<FacebookPostInterface *>(list->object);
@@ -637,7 +637,7 @@ FacebookNameTagInterface * FacebookPostInterfacePrivate::story_tags_at(QDeclarat
     return 0;
 }
 
-void FacebookPostInterfacePrivate::story_tags_clear(QDeclarativeListProperty<FacebookNameTagInterface> *list)
+void FacebookPostInterfacePrivate::story_tags_clear(QQmlListProperty<FacebookNameTagInterface> *list)
 {
     FacebookPostInterface *interface = qobject_cast<FacebookPostInterface *>(list->object);
     if (interface) {
@@ -648,7 +648,7 @@ void FacebookPostInterfacePrivate::story_tags_clear(QDeclarativeListProperty<Fac
     }
 }
 
-int FacebookPostInterfacePrivate::story_tags_count(QDeclarativeListProperty<FacebookNameTagInterface> *list)
+int FacebookPostInterfacePrivate::story_tags_count(QQmlListProperty<FacebookNameTagInterface> *list)
 {
     FacebookPostInterface *interface = qobject_cast<FacebookPostInterface *>(list->object);
     if (interface) {
@@ -657,7 +657,7 @@ int FacebookPostInterfacePrivate::story_tags_count(QDeclarativeListProperty<Face
     return 0;
 }
 
-void FacebookPostInterfacePrivate::with_tags_append(QDeclarativeListProperty<FacebookObjectReferenceInterface> *list,
+void FacebookPostInterfacePrivate::with_tags_append(QQmlListProperty<FacebookObjectReferenceInterface> *list,
                                                     FacebookObjectReferenceInterface *data)
 {
     FacebookPostInterface *interface = qobject_cast<FacebookPostInterface *>(list->object);
@@ -667,7 +667,7 @@ void FacebookPostInterfacePrivate::with_tags_append(QDeclarativeListProperty<Fac
     }
 }
 
-FacebookObjectReferenceInterface * FacebookPostInterfacePrivate::with_tags_at(QDeclarativeListProperty<FacebookObjectReferenceInterface> *list,
+FacebookObjectReferenceInterface * FacebookPostInterfacePrivate::with_tags_at(QQmlListProperty<FacebookObjectReferenceInterface> *list,
                                                                               int index)
 {
     FacebookPostInterface *interface = qobject_cast<FacebookPostInterface *>(list->object);
@@ -679,7 +679,7 @@ FacebookObjectReferenceInterface * FacebookPostInterfacePrivate::with_tags_at(QD
     return 0;
 }
 
-void FacebookPostInterfacePrivate::with_tags_clear(QDeclarativeListProperty<FacebookObjectReferenceInterface> *list)
+void FacebookPostInterfacePrivate::with_tags_clear(QQmlListProperty<FacebookObjectReferenceInterface> *list)
 {
     FacebookPostInterface *interface = qobject_cast<FacebookPostInterface *>(list->object);
     if (interface) {
@@ -690,7 +690,7 @@ void FacebookPostInterfacePrivate::with_tags_clear(QDeclarativeListProperty<Face
     }
 }
 
-int FacebookPostInterfacePrivate::with_tags_count(QDeclarativeListProperty<FacebookObjectReferenceInterface> *list)
+int FacebookPostInterfacePrivate::with_tags_count(QQmlListProperty<FacebookObjectReferenceInterface> *list)
 {
     FacebookPostInterface *interface = qobject_cast<FacebookPostInterface *>(list->object);
     if (interface) {
@@ -867,9 +867,9 @@ FacebookObjectReferenceInterface * FacebookPostInterface::from() const
     \qmlproperty list<FacebookObjectReference> FacebookPost::to
     Holds a list of references to the users or profiles which are targetted by this post.
 */
-QDeclarativeListProperty<FacebookObjectReferenceInterface> FacebookPostInterface::to()
+QQmlListProperty<FacebookObjectReferenceInterface> FacebookPostInterface::to()
 {
-    return QDeclarativeListProperty<FacebookObjectReferenceInterface>(
+    return QQmlListProperty<FacebookObjectReferenceInterface>(
                 this, 0,
                 &FacebookPostInterfacePrivate::to_append,
                 &FacebookPostInterfacePrivate::to_count,
@@ -891,9 +891,9 @@ QString FacebookPostInterface::message() const
     \qmlproperty list<FacebookNameTag> FacebookPost::messageTags
     Holds the objects tagged in the message.
 */
-QDeclarativeListProperty<FacebookNameTagInterface> FacebookPostInterface::messageTags()
+QQmlListProperty<FacebookNameTagInterface> FacebookPostInterface::messageTags()
 {
-    return QDeclarativeListProperty<FacebookNameTagInterface>(
+    return QQmlListProperty<FacebookNameTagInterface>(
                 this, 0,
                 &FacebookPostInterfacePrivate::message_tags_append,
                 &FacebookPostInterfacePrivate::message_tags_count,
@@ -965,9 +965,9 @@ QUrl FacebookPostInterface::source() const
     \qmlproperty list<FacebookPostProperty> FacebookPost::properties
     Holds a list of properties for the attached content.
 */
-QDeclarativeListProperty<FacebookPostPropertyInterface> FacebookPostInterface::properties()
+QQmlListProperty<FacebookPostPropertyInterface> FacebookPostInterface::properties()
 {
-    return QDeclarativeListProperty<FacebookPostPropertyInterface>(
+    return QQmlListProperty<FacebookPostPropertyInterface>(
                 this, 0,
                 &FacebookPostInterfacePrivate::properties_append,
                 &FacebookPostInterfacePrivate::properties_count,
@@ -989,9 +989,9 @@ QUrl FacebookPostInterface::icon() const
     \qmlproperty list<FacebookPostAction> FacebookPost::actions
     Holds a list of actions that can be done with this post. (not generated yet)
 */
-QDeclarativeListProperty<FacebookPostActionInterface> FacebookPostInterface::actions()
+QQmlListProperty<FacebookPostActionInterface> FacebookPostInterface::actions()
 {
-    return QDeclarativeListProperty<FacebookPostActionInterface>(
+    return QQmlListProperty<FacebookPostActionInterface>(
                 this, 0,
                 &FacebookPostInterfacePrivate::actions_append,
                 &FacebookPostInterfacePrivate::actions_count,
@@ -1023,9 +1023,9 @@ QString FacebookPostInterface::story() const
     \qmlproperty list<FacebookNameTag> FacebookPost::storyTags
     Holds the objects tagged in the story.
 */
-QDeclarativeListProperty<FacebookNameTagInterface> FacebookPostInterface::storyTags()
+QQmlListProperty<FacebookNameTagInterface> FacebookPostInterface::storyTags()
 {
-    return QDeclarativeListProperty<FacebookNameTagInterface>(
+    return QQmlListProperty<FacebookNameTagInterface>(
                 this, 0,
                 &FacebookPostInterfacePrivate::story_tags_append,
                 &FacebookPostInterfacePrivate::story_tags_count,
@@ -1037,9 +1037,9 @@ QDeclarativeListProperty<FacebookNameTagInterface> FacebookPostInterface::storyT
     \qmlproperty list<FacebookObjectReference> FacebookPost::withTags
     Holds the objects or users that are tagged with the "Who are you with ?" field. (not generated yet)
 */
-QDeclarativeListProperty<FacebookObjectReferenceInterface> FacebookPostInterface::withTags()
+QQmlListProperty<FacebookObjectReferenceInterface> FacebookPostInterface::withTags()
 {
-    return QDeclarativeListProperty<FacebookObjectReferenceInterface>(
+    return QQmlListProperty<FacebookObjectReferenceInterface>(
                 this, 0,
                 &FacebookPostInterfacePrivate::with_tags_append,
                 &FacebookPostInterfacePrivate::with_tags_count,

@@ -34,17 +34,9 @@
 
 #include <QtCore/QAbstractListModel>
 #include <QtGlobal>
-#if QT_VERSION_5
 #include <QtQml>
 #include <QQmlParserStatus>
 #include <QQmlListProperty>
-#define QDeclarativeParserStatus QQmlParserStatus
-#define QDeclarativeListProperty QQmlListProperty
-#else
-#include <qdeclarative.h>
-#include <QDeclarativeParserStatus>
-#include <QDeclarativeListProperty>
-#endif
 
 #include "filterinterface.h"
 #include "sorterinterface.h"
@@ -54,10 +46,10 @@ class SocialNetworkInterface;
 class IdentifiableContentItemInterface;
 
 class SocialNetworkModelInterfacePrivate;
-class SocialNetworkModelInterface: public QAbstractListModel, public QDeclarativeParserStatus
+class SocialNetworkModelInterface: public QAbstractListModel, public QQmlParserStatus
 {
     Q_OBJECT
-    Q_INTERFACES(QDeclarativeParserStatus)
+    Q_INTERFACES(QQmlParserStatus)
     Q_PROPERTY(SocialNetworkInterface::Status status READ status NOTIFY statusChanged)
     Q_PROPERTY(SocialNetworkInterface::ErrorType error READ error NOTIFY errorChanged)
     Q_PROPERTY(QString errorMessage READ errorMessage NOTIFY errorMessageChanged)
@@ -69,8 +61,8 @@ class SocialNetworkModelInterface: public QAbstractListModel, public QDeclarativ
     Q_PROPERTY(IdentifiableContentItemInterface *node READ node NOTIFY nodeChanged)
     Q_PROPERTY(bool hasPrevious READ hasPrevious NOTIFY hasPreviousChanged)
     Q_PROPERTY(bool hasNext READ hasNext NOTIFY hasNextChanged)
-    Q_PROPERTY(QDeclarativeListProperty<FilterInterface> filters READ filters)
-    Q_PROPERTY(QDeclarativeListProperty<SorterInterface> sorters READ sorters)
+    Q_PROPERTY(QQmlListProperty<FilterInterface> filters READ filters)
+    Q_PROPERTY(QQmlListProperty<SorterInterface> sorters READ sorters)
     Q_PROPERTY(int count READ count NOTIFY countChanged)
 public:
     enum Roles {
@@ -84,7 +76,7 @@ public:
     explicit SocialNetworkModelInterface(QObject *parent = 0);
     virtual ~SocialNetworkModelInterface();
 
-    // QDeclarativeParserStatus
+    // QQmlParserStatus
     virtual void classBegin();
     virtual void componentComplete();
 
@@ -103,8 +95,8 @@ public:
     IdentifiableContentItemInterface *node() const;
     bool hasPrevious() const;
     bool hasNext() const;
-    QDeclarativeListProperty<FilterInterface> filters();
-    QDeclarativeListProperty<SorterInterface> sorters();
+    QQmlListProperty<FilterInterface> filters();
+    QQmlListProperty<SorterInterface> sorters();
     int count() const;
 
     // Property mutators.
@@ -134,9 +126,7 @@ Q_SIGNALS:
     void countChanged();
 
 protected:
-#if QT_VERSION >= QT_VERSION_CHECK(5, 0, 0)
     QHash<int, QByteArray> roleNames() const;
-#endif
     bool event(QEvent *e);
     QScopedPointer<SocialNetworkModelInterfacePrivate> d_ptr;
 private:

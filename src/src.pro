@@ -14,7 +14,7 @@ INSTALLS += qmldir
 qmltypes.commands = qmlplugindump -nonrelocatable org.nemomobile.social 1.0 > $$PWD/plugins.qmltypes
 QMAKE_EXTRA_TARGETS += qmltypes
 
-QT = core qml network
+QT = core gui qml network
 
 SOURCES += \
     $$PWD/plugin.cpp \

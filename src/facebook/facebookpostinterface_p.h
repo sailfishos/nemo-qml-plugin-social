@@ -60,39 +60,39 @@ private:
     static void to_append(QQmlListProperty<FacebookObjectReferenceInterface> *list,
                           FacebookObjectReferenceInterface *data);
     static FacebookObjectReferenceInterface * to_at(QQmlListProperty<FacebookObjectReferenceInterface> *list,
-                                                    int index);
+                                                    long long int index);
     static void to_clear(QQmlListProperty<FacebookObjectReferenceInterface> *list);
-    static int to_count(QQmlListProperty<FacebookObjectReferenceInterface> *list);
+    static long long int to_count(QQmlListProperty<FacebookObjectReferenceInterface> *list);
     static void message_tags_append(QQmlListProperty<FacebookNameTagInterface> *list,
                                     FacebookNameTagInterface *data);
     static FacebookNameTagInterface * message_tags_at(QQmlListProperty<FacebookNameTagInterface> *list,
-                                                      int index);
+                                                      long long int index);
     static void message_tags_clear(QQmlListProperty<FacebookNameTagInterface> *list);
-    static int message_tags_count(QQmlListProperty<FacebookNameTagInterface> *list);
+    static long long int message_tags_count(QQmlListProperty<FacebookNameTagInterface> *list);
     static void properties_append(QQmlListProperty<FacebookPostPropertyInterface> *list,
                                   FacebookPostPropertyInterface *data);
     static FacebookPostPropertyInterface * properties_at(QQmlListProperty<FacebookPostPropertyInterface> *list,
-                                                         int index);
+                                                         long long int index);
     static void properties_clear(QQmlListProperty<FacebookPostPropertyInterface> *list);
-    static int properties_count(QQmlListProperty<FacebookPostPropertyInterface> *list);
+    static long long int properties_count(QQmlListProperty<FacebookPostPropertyInterface> *list);
     static void actions_append(QQmlListProperty<FacebookPostActionInterface> *list,
                                FacebookPostActionInterface *data);
     static FacebookPostActionInterface * actions_at(QQmlListProperty<FacebookPostActionInterface> *list,
-                                                    int index);
+                                                    long long int index);
     static void actions_clear(QQmlListProperty<FacebookPostActionInterface> *list);
-    static int actions_count(QQmlListProperty<FacebookPostActionInterface> *list);
+    static long long int actions_count(QQmlListProperty<FacebookPostActionInterface> *list);
     static void story_tags_append(QQmlListProperty<FacebookNameTagInterface> *list,
                                   FacebookNameTagInterface *data);
     static FacebookNameTagInterface * story_tags_at(QQmlListProperty<FacebookNameTagInterface> *list,
-                                                    int index);
+                                                    long long int index);
     static void story_tags_clear(QQmlListProperty<FacebookNameTagInterface> *list);
-    static int story_tags_count(QQmlListProperty<FacebookNameTagInterface> *list);
+    static long long int story_tags_count(QQmlListProperty<FacebookNameTagInterface> *list);
     static void with_tags_append(QQmlListProperty<FacebookObjectReferenceInterface> *list,
                                  FacebookObjectReferenceInterface *data);
     static FacebookObjectReferenceInterface * with_tags_at(QQmlListProperty<FacebookObjectReferenceInterface> *list,
-                                                           int index);
+                                                           long long int index);
     static void with_tags_clear(QQmlListProperty<FacebookObjectReferenceInterface> *list);
-    static int with_tags_count(QQmlListProperty<FacebookObjectReferenceInterface> *list);
+    static long long int with_tags_count(QQmlListProperty<FacebookObjectReferenceInterface> *list);
 };
 
 #endif // FACEBOOKPOSTINTERFACE_P_H

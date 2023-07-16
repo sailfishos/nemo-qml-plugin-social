@@ -122,7 +122,11 @@ QVariantMap ContentItemInterfacePrivate::parseReplyData(const QByteArray &replyD
         return QVariantMap();
     }
 
+#if (QT_VERSION >= QT_VERSION_CHECK(6, 0, 0))
+    if (data.userType() != QVariant::Map) {
+#else
     if (data.type() != QVariant::Map) {
+#endif
         *ok = false;
         return QVariantMap();
     }

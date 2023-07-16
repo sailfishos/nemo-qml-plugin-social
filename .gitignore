@@ -11,3 +11,9 @@ install
 
 # Python object files
 *.pyc
+*.o
+moc_*
+*.moc
+*.so
+Makefile
+.qmake.stash

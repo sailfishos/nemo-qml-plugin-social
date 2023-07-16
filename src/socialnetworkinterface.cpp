@@ -685,7 +685,12 @@ bool ArbitraryRequestHandler::request(SocialNetworkInterface::RequestType reques
     QStringList queryItemKeys = queryItems.keys();
     foreach (const QString &key, queryItemKeys) {
         formattedQueryItems.append(
-                    qMakePair<QString, QString>(key, queryItems.value(key).toString()));
+#if (QT_VERSION >= QT_VERSION_CHECK(6, 0, 0))
+                    QPair<QString, QString>(key, queryItems.value(key).toString())
+#else
+                    qMakePair<QString, QString>(key, queryItems.value(key).toString())
+#endif
+                );
     }
 
     QUrl url(requestUri);
@@ -1203,7 +1208,11 @@ void SocialNetworkInterfacePrivate::populate(SocialNetworkModelInterface *model,
         return;
     }
 
+#if (QT_VERSION >= QT_VERSION_CHECK(6, 0, 0))
+    QSet<FilterInterface *> filterSet(filters.begin(), filters.end());
+#else
     QSet<FilterInterface *> filterSet = filters.toSet();
+#endif
 
     int guessedType = guessType(identifier, type, filterSet);
     // If we guessed a nice type, we should update all models that old description
@@ -1338,7 +1347,12 @@ void SocialNetworkInterfacePrivate::removeModel(SocialNetworkModelInterface *mod
 void SocialNetworkInterfacePrivate::loadNext(SocialNetworkModelInterface *model)
 {
     CacheNode::Ptr node = getNode(model->nodeIdentifier(), model->nodeType(),
-                                  model->d_func()->filters.toSet());
+#if (QT_VERSION >= QT_VERSION_CHECK(6, 0, 0))
+                                  QSet(model->d_func()->filters.begin(), model->d_func()->filters.end())
+#else
+                                  model->d_func()->filters.toSet()
+#endif
+    );
     if (node.isNull()) {
         qWarning() << Q_FUNC_INFO << "The model is not loaded. Please call populate() first";
         return;
@@ -1351,7 +1365,12 @@ void SocialNetworkInterfacePrivate::loadNext(SocialNetworkModelInterface *model)
 void SocialNetworkInterfacePrivate::loadPrevious(SocialNetworkModelInterface *model)
 {
     CacheNode::Ptr node = getNode(model->nodeIdentifier(), model->nodeType(),
-                                  model->d_func()->filters.toSet());
+#if (QT_VERSION >= QT_VERSION_CHECK(6, 0, 0))
+                                  QSet(model->d_func()->filters.begin(), model->d_func()->filters.end())
+#else
+                                  model->d_func()->filters.toSet()
+#endif
+    );
     if (node.isNull()) {
         qWarning() << Q_FUNC_INFO << "The model is not loaded. Please call populate() first";
         return;

@@ -56,21 +56,21 @@ private:
     static void tags_append(QQmlListProperty<FacebookPhotoTagInterface> *list,
                             FacebookPhotoTagInterface *data);
     static FacebookPhotoTagInterface * tags_at(QQmlListProperty<FacebookPhotoTagInterface> *list,
-                                               int index);
+                                               long long int index);
     static void tags_clear(QQmlListProperty<FacebookPhotoTagInterface> *list);
-    static int tags_count(QQmlListProperty<FacebookPhotoTagInterface> *list);
+    static long long int tags_count(QQmlListProperty<FacebookPhotoTagInterface> *list);
     static void name_tags_append(QQmlListProperty<FacebookNameTagInterface> *list,
                                  FacebookNameTagInterface *data);
     static FacebookNameTagInterface * name_tags_at(QQmlListProperty<FacebookNameTagInterface> *list,
-                                                   int index);
+                                                   long long int index);
     static void name_tags_clear(QQmlListProperty<FacebookNameTagInterface> *list);
-    static int name_tags_count(QQmlListProperty<FacebookNameTagInterface> *list);
+    static long long int name_tags_count(QQmlListProperty<FacebookNameTagInterface> *list);
     static void images_append(QQmlListProperty<FacebookPhotoImageInterface> *list,
                               FacebookPhotoImageInterface *data);
     static FacebookPhotoImageInterface * images_at(QQmlListProperty<FacebookPhotoImageInterface> *list,
-                                                   int index);
+                                                   long long int index);
     static void images_clear(QQmlListProperty<FacebookPhotoImageInterface> *list);
-    static int images_count(QQmlListProperty<FacebookPhotoImageInterface> *list);
+    static long long int images_count(QQmlListProperty<FacebookPhotoImageInterface> *list);
 private:
     int pendingTagToRemoveIndex;
 };

@@ -113,15 +113,26 @@ QNetworkRequest TwitterInterfacePrivate::networkRequest(const QString &extraPath
 
     const QStringList &extraDataKeys = extraData.keys();
     foreach (const QString &key, extraDataKeys) {
+#if (QT_VERSION >= QT_VERSION_CHECK(6, 0, 0))
+        queryItems.append(QPair<QString, QString>(key, extraData.value(key).toString()));
+        parameters.append(QPair<QByteArray, QByteArray>(key.toLocal8Bit(),
+                                                            extraData.value(key).toByteArray()));
+#else
         queryItems.append(qMakePair<QString, QString>(key, extraData.value(key).toString()));
         parameters.append(qMakePair<QByteArray, QByteArray>(key.toLocal8Bit(),
                                                             extraData.value(key).toByteArray()));
+#endif
     }
 
     const QStringList &postDataKeys = postData.keys();
     foreach (const QString &key, postDataKeys) {
+#if (QT_VERSION >= QT_VERSION_CHECK(6, 0, 0))
+        parameters.append(QPair<QByteArray, QByteArray>(key.toLocal8Bit(),
+                                                            postData.value(key).toByteArray()));
+#else
         parameters.append(qMakePair<QByteArray, QByteArray>(key.toLocal8Bit(),
                                                             postData.value(key).toByteArray()));
+#endif
     }
 
 
@@ -364,7 +375,12 @@ void TwitterInterfacePrivate::populateDataForNode(CacheNode::Ptr node)
 /*! \reimp */
 void TwitterInterfacePrivate::populateRelatedDataforNode(CacheNode::Ptr node)
 {
+
+#if (QT_VERSION >= QT_VERSION_CHECK(6, 0, 0))
+    if (!performRelatedDataRequest(node, node->identifier(), QList<FilterInterface *>(node->filters().begin(), node->filters().end()))) {
+#else
     if (!performRelatedDataRequest(node, node->identifier(), node->filters().toList())) {
+#endif
         setError(node, SocialNetworkInterface::DataUpdateError,
                  QLatin1String("Cannot perform related data request"));
     }

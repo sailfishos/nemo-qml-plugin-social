@@ -79,7 +79,7 @@ void SocialNetworkModelInterfacePrivate::filters_append(QQmlListProperty<FilterI
 }
 
 /*! \internal */
-FilterInterface *SocialNetworkModelInterfacePrivate::filters_at(QQmlListProperty<FilterInterface> *list, int index)
+FilterInterface *SocialNetworkModelInterfacePrivate::filters_at(QQmlListProperty<FilterInterface> *list, long long int index)
 {
     SocialNetworkModelInterface *model = qobject_cast<SocialNetworkModelInterface *>(list->object);
     if (model && model->d_func()->filters.count() > index && index >= 0)
@@ -97,7 +97,7 @@ void SocialNetworkModelInterfacePrivate::filters_clear(QQmlListProperty<FilterIn
 }
 
 /*! \internal */
-int SocialNetworkModelInterfacePrivate::filters_count(QQmlListProperty<FilterInterface> *list)
+long long int SocialNetworkModelInterfacePrivate::filters_count(QQmlListProperty<FilterInterface> *list)
 {
     SocialNetworkModelInterface *model = qobject_cast<SocialNetworkModelInterface *>(list->object);
     if (model)
@@ -122,7 +122,7 @@ void SocialNetworkModelInterfacePrivate::sorters_append(QQmlListProperty<SorterI
 }
 
 /*! \internal */
-SorterInterface *SocialNetworkModelInterfacePrivate::sorters_at(QQmlListProperty<SorterInterface> *list, int index)
+SorterInterface *SocialNetworkModelInterfacePrivate::sorters_at(QQmlListProperty<SorterInterface> *list, long long int index)
 {
     SocialNetworkModelInterface *model = qobject_cast<SocialNetworkModelInterface *>(list->object);
     if (model && model->d_func()->sorters.count() > index && index >= 0)
@@ -144,7 +144,7 @@ void SocialNetworkModelInterfacePrivate::sorters_clear(QQmlListProperty<SorterIn
 }
 
 /*! \internal */
-int SocialNetworkModelInterfacePrivate::sorters_count(QQmlListProperty<SorterInterface> *list)
+long long int SocialNetworkModelInterfacePrivate::sorters_count(QQmlListProperty<SorterInterface> *list)
 {
     SocialNetworkModelInterface *model = qobject_cast<SocialNetworkModelInterface *>(list->object);
     if (model)

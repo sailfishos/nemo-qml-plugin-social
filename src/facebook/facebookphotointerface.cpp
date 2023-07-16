@@ -240,7 +240,11 @@ void FacebookPhotoInterfacePrivate::emitPropertyChangeSignals(const QVariantMap 
         nameTags.clear();
         // Update with the new name_tag data
         // Only one entry
+#if (QT_VERSION >= QT_VERSION_CHECK(6, 0, 0))
+        if (newNameTagsData.userType() == QVariant::List) {
+#else
         if (newNameTagsData.type() == QVariant::List) {
+#endif
             QVariantList newNameTagsList = newNameTagsData.toList();
             if (newNameTagsList.count() == 1) {
                 QVariantList nameTagList = newNameTagsList.at(0).toList();
@@ -251,7 +255,12 @@ void FacebookPhotoInterfacePrivate::emitPropertyChangeSignals(const QVariantMap 
                     nameTags.append(nameTagInterface);
                 }
             }
+
+#if (QT_VERSION >= QT_VERSION_CHECK(6, 0, 0))
+        } else if (newNameTagsData.userType() == QVariant::Map) {
+#else
         } else if (newNameTagsData.type() == QVariant::Map) {
+#endif
             foreach (QVariant nameTagList, newNameTagsData.toMap()) {
                 foreach (QVariant nameTag, nameTagList.toList()) {
                     QVariantMap nameTagMap = nameTag.toMap();
@@ -390,7 +399,7 @@ void FacebookPhotoInterfacePrivate::tags_append(QQmlListProperty<FacebookPhotoTa
 }
 
 FacebookPhotoTagInterface * FacebookPhotoInterfacePrivate::tags_at(QQmlListProperty<FacebookPhotoTagInterface> *list,
-                                                                   int index)
+                                                                   long long int index)
 {
     FacebookPhotoInterface *interface = qobject_cast<FacebookPhotoInterface *>(list->object);
     if (interface
@@ -412,7 +421,7 @@ void FacebookPhotoInterfacePrivate::tags_clear(QQmlListProperty<FacebookPhotoTag
     }
 }
 
-int FacebookPhotoInterfacePrivate::tags_count(QQmlListProperty<FacebookPhotoTagInterface> *list)
+long long int FacebookPhotoInterfacePrivate::tags_count(QQmlListProperty<FacebookPhotoTagInterface> *list)
 {
     FacebookPhotoInterface *interface = qobject_cast<FacebookPhotoInterface *>(list->object);
     if (interface) {
@@ -432,7 +441,7 @@ void FacebookPhotoInterfacePrivate::name_tags_append(QQmlListProperty<FacebookNa
 }
 
 FacebookNameTagInterface * FacebookPhotoInterfacePrivate::name_tags_at(QQmlListProperty<FacebookNameTagInterface> *list,
-                                                                       int index)
+                                                                       long long int index)
 {
     FacebookPhotoInterface *interface = qobject_cast<FacebookPhotoInterface *>(list->object);
     if (interface
@@ -454,7 +463,7 @@ void FacebookPhotoInterfacePrivate::name_tags_clear(QQmlListProperty<FacebookNam
     }
 }
 
-int FacebookPhotoInterfacePrivate::name_tags_count(QQmlListProperty<FacebookNameTagInterface> *list)
+long long int FacebookPhotoInterfacePrivate::name_tags_count(QQmlListProperty<FacebookNameTagInterface> *list)
 {
     FacebookPhotoInterface *interface = qobject_cast<FacebookPhotoInterface *>(list->object);
     if (interface) {
@@ -474,7 +483,7 @@ void FacebookPhotoInterfacePrivate::images_append(QQmlListProperty<FacebookPhoto
 }
 
 FacebookPhotoImageInterface * FacebookPhotoInterfacePrivate::images_at(QQmlListProperty<FacebookPhotoImageInterface> *list,
-                                                                       int index)
+                                                                       long long int index)
 {
     FacebookPhotoInterface *interface = qobject_cast<FacebookPhotoInterface *>(list->object);
     if (interface
@@ -496,7 +505,7 @@ void FacebookPhotoInterfacePrivate::images_clear(QQmlListProperty<FacebookPhotoI
     }
 }
 
-int FacebookPhotoInterfacePrivate::images_count(QQmlListProperty<FacebookPhotoImageInterface> *list)
+long long int FacebookPhotoInterfacePrivate::images_count(QQmlListProperty<FacebookPhotoImageInterface> *list)
 {
     FacebookPhotoInterface *interface = qobject_cast<FacebookPhotoInterface *>(list->object);
     if (interface) {

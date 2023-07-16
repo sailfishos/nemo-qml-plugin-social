@@ -494,14 +494,14 @@ QNetworkReply * FacebookInterfacePrivate::postRequest(const QString &objectIdent
     QString multipartBoundary = QLatin1String("-------Sska2129ifcalksmqq3");
     QByteArray postData;
     foreach (const QString &key, data.keys()) {
-        postData.append("--"+multipartBoundary+"\r\n");
-        postData.append("Content-Disposition: form-data; name=\"");
-        postData.append(key);
-        postData.append("\"\r\n\r\n");
-        postData.append(data.value(key).toString());
-        postData.append("\r\n");
+        postData.append(QByteArray("--")+multipartBoundary.toLatin1()+QByteArray("\r\n"));
+        postData.append(QByteArray("Content-Disposition: form-data; name=\""));
+        postData.append(key.toLatin1());
+        postData.append(QByteArray("\"\r\n\r\n"));
+        postData.append(data.value(key).toString().toLatin1());
+        postData.append(QByteArray("\r\n"));
     }
-    postData.append("--"+multipartBoundary+"\r\n");
+    postData.append(QByteArray("--")+multipartBoundary.toLatin1()+QByteArray("\r\n"));
 
     // create request
     QNetworkRequest request(requestUrl(objectIdentifier, extraPath, QStringList(), extraData));
@@ -591,12 +591,12 @@ QUrl FacebookInterfacePrivate::requestUrl(const QString &objectId, const QString
     QString joinedFields = whichFields.join(QLatin1String(","));
     QList<QPair<QString, QString> > queryItems;
     if (!accessToken.isEmpty())
-        queryItems.append(qMakePair<QString, QString>(QLatin1String("access_token"), accessToken));
+        queryItems.append(QPair<QString, QString>(QLatin1String("access_token"), accessToken));
     if (!whichFields.isEmpty())
-        queryItems.append(qMakePair<QString, QString>(QLatin1String("fields"), joinedFields));
+        queryItems.append(QPair<QString, QString>(QLatin1String("fields"), joinedFields));
     QStringList extraDataKeys = extraData.keys();
     foreach (const QString &key, extraDataKeys) {
-        queryItems.append(qMakePair<QString, QString>(key, extraData.value(key).toString()));
+        queryItems.append(QPair<QString, QString>(key, extraData.value(key).toString()));
     }
 
     QUrl returnedUrl;
@@ -646,7 +646,7 @@ QNetworkReply * FacebookInterfacePrivate::uploadImage(const QString &objectId,
     f.close();
 
     QHttpMultiPart *multiPart = new QHttpMultiPart(QHttpMultiPart::FormDataType);
-    multiPart->setBoundary("-------Sska2129ifcalksmqq3");
+    multiPart->setBoundary(QByteArray("-------Sska2129ifcalksmqq3"));
 
     QHttpPart accessTokenPart;
     accessTokenPart.setHeader(QNetworkRequest::ContentDispositionHeader, QVariant("form-data; name=\"access_token\""));

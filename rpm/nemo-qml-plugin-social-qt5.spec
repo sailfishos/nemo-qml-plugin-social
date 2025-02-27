@@ -17,7 +17,6 @@ BuildRequires:  pkgconfig(Qt5Test)
 
 %package tests
 Summary:    Social QML adapters for Nemo - unit tests
-Group:      System/Libraries
 Requires:   %{name} = %{version}-%{release}
 
 %description tests
@@ -36,14 +35,12 @@ This package includes the unit tests.
 %qmake5_install
 
 %files
-%defattr(-,root,root,-)
 %license LICENSE.BSD
 %{_libdir}/qt5/qml/org/nemomobile/social/libnemosocial.so
 %{_libdir}/qt5/qml/org/nemomobile/social/plugins.qmltypes
 %{_libdir}/qt5/qml/org/nemomobile/social/qmldir
 
 %files tests
-%defattr(-,root,root,-)
-/opt/tests/nemo-qml-plugins-qt5/social/facebooksocialtest
-/opt/tests/nemo-qml-plugins-qt5/social/twittersocialtest
-/opt/tests/nemo-qml-plugins-qt5/social/share/*.qml
+/opt/tests/nemo-qml-plugin-social-qt5/facebooksocialtest
+/opt/tests/nemo-qml-plugin-social-qt5/twittersocialtest
+/opt/tests/nemo-qml-plugin-social-qt5/share/*.qml

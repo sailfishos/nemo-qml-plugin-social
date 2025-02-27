@@ -1,16 +1,9 @@
 #include <QtCore/QDir>
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 0, 0)
-# include <QtQml>
-# include <QQuickItem>
-# include <QQuickView>
-# include <QGuiApplication>
-# define QDeclarativeView QQuickView
-#else
-# include <QtDeclarative>
-# include <QtDeclarative/QDeclarativeView>
-# include <QtGui/QApplication>
-#endif
+#include <QtQml>
+#include <QQuickItem>
+#include <QQuickView>
+#include <QGuiApplication>
 #include <QDebug>
 #include <QtNetwork/QNetworkAccessManager>
 #include <QtNetwork/QNetworkReply>
@@ -198,12 +191,8 @@ void TokenRequestHandler::continueRequestFinishedHandler()
 
 int main(int argc, char *argv[])
 {
-#if QT_VERSION >= QT_VERSION_CHECK(5, 0, 0)
     QGuiApplication app(argc, argv);
-#else
-    QApplication app(argc, argv);
-#endif
-    QDeclarativeView view;
+    QQuickView view;
 
     QStringList arguments = app.arguments();
     if (arguments.count() != 3 && arguments.count() != 6) {
@@ -240,11 +229,11 @@ int main(int argc, char *argv[])
         view.rootObject()->setProperty("tokenSecret", arguments.at(4));
         view.rootObject()->setProperty("identifier", arguments.at(5));
     }
-    if (view.status() == QDeclarativeView::Error) {
+    if (view.status() == QQuickView::Error) {
         qWarning() << "Unable to read main qml file";
         return 1;
     }
-    view.setResizeMode(QDeclarativeView::SizeRootObjectToView);
+    view.setResizeMode(QQuickView::SizeRootObjectToView);
     view.show();
     QObject::connect(view.engine(), SIGNAL(quit()), &app, SLOT(quit()));
 

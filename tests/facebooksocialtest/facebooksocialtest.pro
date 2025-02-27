@@ -1,5 +1,5 @@
 TARGET = facebooksocialtest
-PREFIX = /opt/tests/nemo-qml-plugins-qt5/social/
+PREFIX = /opt/tests/nemo-qml-plugin-social-qt5/
 
 QT = core gui qml quick
 
